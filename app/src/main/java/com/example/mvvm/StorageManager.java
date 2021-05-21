@@ -1,14 +1,31 @@
 package com.example.mvvm;
 
-public class StorageManager {
-    public boolean saveTodoModel(TodoModel todoModel)
-    {
-        return true;
-    }
-    public TodoModel getTodoModel(String name)
-    {
-        TodoModel todoModel = new TodoModel();
+import android.content.Context;
 
-        return todoModel;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
+import androidx.room.Room;
+import androidx.room.Update;
+
+import java.util.List;
+
+public class StorageManager {
+    private Context mContext;
+    public AppDatabase db;
+
+    public StorageManager(Context context)
+    {
+        mContext = context;
+        db = Room.databaseBuilder(mContext.getApplicationContext(), AppDatabase.class, "test_room_db").build();
+    }
+
+    public void recycle()
+    {
+        db.close();
+        db = null;
+        mContext = null;
     }
 }

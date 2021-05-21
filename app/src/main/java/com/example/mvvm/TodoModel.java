@@ -1,20 +1,56 @@
 package com.example.mvvm;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import org.jetbrains.annotations.NotNull;
+
+@Entity(tableName = AppDatabase.TABLE_TODO)
 public class TodoModel {
-    public String Name;
-    public String Content;
-    public boolean IsDone;
+    @NotNull
+    @PrimaryKey
+    public String name;
+
+    public String content;
+    public boolean isDone;
 
     public TodoModel()
     {
-        Name = "Default Title";
-        Content = "Default Content";
-        IsDone = false;
+        name = "Default Title";
+        content = "Default content";
+        isDone = false;
     }
 
-    public TodoModel(String name, String content, boolean isDone) {
-        Name = name;
-        Content = content;
-        IsDone = isDone;
+    @Ignore
+    public TodoModel(@NotNull String name, String content, boolean isDone) {
+        this.name = name;
+        this.content = content;
+        this.isDone = isDone;
+    }
+
+    @Override
+    public String toString() {
+        return "TodoModel{" +
+                "Name='" + name + '\'' +
+                ", content='" + content + '\'' +
+                ", isDone=" + isDone +
+                '}';
+    }
+
+    public static TodoModel fromString(String str){
+        int start = str.indexOf("Name='")+6;
+        int end = str.indexOf('\'', start);
+        String name = str.substring(start, end);
+
+        start = str.indexOf(", content='")+11;
+        end = str.indexOf('\'', start);
+        String content = str.substring(start, end);
+
+        start = str.indexOf(", isDone=")+9;
+        end = str.indexOf('}', start);
+        boolean isDone = Boolean.getBoolean(str.substring(start, end));
+
+        return new TodoModel(name, content, isDone);
     }
 }
