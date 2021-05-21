@@ -8,16 +8,45 @@
     android:layout_height="match_parent"
     tools:context=".SecondFragment">
 
-    <TextView
-        android:id="@+id/textview_second"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_second"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/layout_title"
+        app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="20dp">
+        <EditText
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:id="@+id/edt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:hint="Title" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_content"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/layout_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="20dp">
+        <EditText
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:id="@+id/edt_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:minLines="5"
+            android:hint="Title"
+            android:textAlignment=""/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/button_second"
@@ -27,5 +56,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />
+        app:layout_constraintTop_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
