@@ -46,9 +46,10 @@ public class SecondFragment extends Fragment {
             public void onClick(View v) {
                 String name = binding.edtTitle.getText().toString();
                 String content = binding.edtContent.getText().toString();
+                boolean isDone = binding.checkboxIsDone.isSelected();
 
                 StorageManager storageManager = new StorageManager(getContext());
-                storageManager.db.todoDao().insert(new TodoModel(name, content, false))
+                storageManager.db.todoDao().insert(new TodoModel(name, content, isDone))
                         .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CompletableObserver() {
                     @Override
                     public void onSubscribe(@NotNull Disposable d) {
@@ -96,7 +97,18 @@ public class SecondFragment extends Fragment {
                 storageManager.recycle();
             }
         });
+    }
 
+    public void setModel(TodoModel todoModel)
+    {
+        binding.edtTitle.setText(todoModel.name);
+        binding.edtContent.setText(todoModel.content);
+        binding.checkboxIsDone.setSelected(todoModel.isDone);
+    }
+
+    public void setButtonText(String str)
+    {
+        binding.buttonSecond.setText(str);
     }
 
     @Override
