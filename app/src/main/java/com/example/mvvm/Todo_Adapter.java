@@ -20,7 +20,6 @@ public class Todo_Adapter extends BaseAdapter {
     static  class  ViewHoder
     {
         EditText ed_title;
-        EditText ed_content;
         CheckBox cb_todo;
     }
 
@@ -51,7 +50,6 @@ public class Todo_Adapter extends BaseAdapter {
         {
             view = new ViewHoder();
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_todo, parent, false);
-            view.ed_content =(EditText) convertView.findViewById(R.id.Content);
             view.ed_title = (EditText) convertView.findViewById(R.id.Title);
             view.cb_todo = (CheckBox) convertView.findViewById(R.id.checkbox);
             convertView.setTag(view);
@@ -63,8 +61,9 @@ public class Todo_Adapter extends BaseAdapter {
 
         TodoModel t = this.Todolist.get(position);
         view.ed_title.setText(t.name);
-        view.ed_content.setText(t.content);
         view.cb_todo.setChecked(t.isDone);
+
+        convertView.setPadding(5, 5, 5, 5);
 
         return convertView;
     }
