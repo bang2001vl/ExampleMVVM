@@ -1,11 +1,14 @@
 package com.example.mvvm;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,12 +22,12 @@ import java.util.zip.Inflater;
 public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
-    private List<Todo> todoList;
+    private List<TodoModel> todoList;
     ListView listtodo;
     Todo_Adapter todo_adapter;
 
 
-    static FirstFragment New_FirstFragment (List<Todo> list)
+    static FirstFragment New_FirstFragment (List<TodoModel> list)
     {
         FirstFragment  f = new FirstFragment();
         f.todoList = list;
@@ -35,11 +38,10 @@ public class FirstFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
-        View view = inflater.inflate(R.layout.fragment_first, container, false);
+        binding = FragmentFirstBinding.inflate(inflater, container, false);
         if (todoList != null )
         {
-            listtodo = view.findViewById(R.id.Listview_item);
+            listtodo = binding.ListviewItem;
             todo_adapter = new Todo_Adapter(todoList, this.getContext());
 
             listtodo.post(new Runnable() {
@@ -49,23 +51,13 @@ public class FirstFragment extends Fragment {
             });
         }
 
-       /* binding = FragmentFirstBinding.inflate(inflater, container, false);
-        return binding.getRoot();*/
-        return view;
 
+        return binding.getRoot();
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-/*
-        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });*/
     }
 
     @Override

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.zip.Inflater;
 
 public class Todo_Adapter extends BaseAdapter {
-    List<Todo> Todolist;
+    List<TodoModel> Todolist;
     Context context;
 
     static  class  ViewHoder
@@ -24,7 +24,7 @@ public class Todo_Adapter extends BaseAdapter {
         CheckBox cb_todo;
     }
 
-    Todo_Adapter(List<Todo> list, Context context)
+    Todo_Adapter(List<TodoModel> list, Context context)
     {
         Todolist = list;
         this.context = context;
@@ -61,10 +61,10 @@ public class Todo_Adapter extends BaseAdapter {
             view = (ViewHoder) convertView.getTag();
         }
 
-        Todo t = this.Todolist.get(position);
-        view.ed_title.setText(t.get_title());
-        view.ed_content.setText(t.get_content());
-        view.cb_todo.setChecked(t.is_isDone());
+        TodoModel t = this.Todolist.get(position);
+        view.ed_title.setText(t.name);
+        view.ed_content.setText(t.content);
+        view.cb_todo.setChecked(t.isDone);
 
         return convertView;
     }
