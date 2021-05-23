@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        Todo t1 = new Todo("1", "Androi", false);
-        List<Todo> todoList = new ArrayList<>( );
+        TodoModel t1 = new TodoModel("1", "Androi", false);
+        List<TodoModel> todoList = new ArrayList<>( );
         todoList.add(t1);
         todoList.add(t1);
         todoList.add(t1);
