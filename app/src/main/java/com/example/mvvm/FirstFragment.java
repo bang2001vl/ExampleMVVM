@@ -41,7 +41,7 @@ public class FirstFragment extends Fragment {
         {
             listtodo = view.findViewById(R.id.Listview_item);
             todo_adapter = new Todo_Adapter(todoList, this.getContext());
-      /*      listtodo.setAdapter(todo_adapter);*/
+
             listtodo.post(new Runnable() {
                 public void run() {
                     listtodo.setAdapter(todo_adapter);
@@ -49,8 +49,9 @@ public class FirstFragment extends Fragment {
             });
         }
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+       /* binding = FragmentFirstBinding.inflate(inflater, container, false);
+        return binding.getRoot();*/
+        return view;
 
     }
 
