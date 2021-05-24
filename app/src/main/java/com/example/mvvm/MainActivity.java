@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private FirstFragment f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,19 +44,9 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-       /* TodoModel t1 = new TodoModel("1", "Androi", false);
-        List<TodoModel> todoList = new ArrayList<>( );
-        todoList.add(t1);
-        todoList.add(t1);
-        todoList.add(t1);
-
-        Fragment f = FirstFragment.New_FirstFragment(todoList);*/
-
-        FirstFragment f = new FirstFragment();
+        f = new FirstFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_content_main, f).commit();
-
-
 
         // Mod sự kiện onClick
         binding.fab.setOnClickListener(new View.OnClickListener() {
@@ -69,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 secondFragment.viewModel = viewModel;
 
                 secondFragment.showNow(getSupportFragmentManager(), "createTodo");
-                /*getSupportFragmentManager().beginTransaction().addToBackStack("createFragment")
-                        .add(R.id.nav_host_fragment_content_main, secondFragment, "MY_TAG").commit();*/
             }
         });
     }
@@ -90,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_refresh) {
+            f.onResume();
             return true;
         }
 
