@@ -18,6 +18,7 @@ public class Todo_Viewmodel  extends ViewModel {
     public MutableLiveData<List<TodoModel>> todos = new MutableLiveData<>();
 
 
+
     private TodoModel current_todo;
 
     public Todo_Viewmodel()
@@ -25,8 +26,6 @@ public class Todo_Viewmodel  extends ViewModel {
        // todos = load du lieu tu database
         if (todos != null && todos.getValue().size() > 0)  current_todo = todos.getValue().get(0);
      }
-
-
 
     public TodoModel getCurrent_todo() {
         return current_todo;
@@ -49,6 +48,19 @@ public class Todo_Viewmodel  extends ViewModel {
         current_todo = todos.getValue().get(Position);
         //open detail_view
     }
+    public void onClick_Checked()
+    {
+        current_todo.isDone = !current_todo.isDone;
+        if ( current_todo.isDone == false)
+        {
+            SpannableStringBuilder spanBuilder = new SpannableStringBuilder(current_todo.name);
+            StrikethroughSpan strikethroughSpan = new StrikethroughSpan();
+            spanBuilder.setSpan( strikethroughSpan, 0, current_todo.name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
+            current_todo.name = spanBuilder.toString();
+        }
+    }
+
 
     public void onClick_Checked()
     {

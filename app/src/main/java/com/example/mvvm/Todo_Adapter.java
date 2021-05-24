@@ -65,6 +65,8 @@ public class Todo_Adapter extends BaseAdapter {
         view.ed_title.setText(t.name);
         view.cb_todo.setChecked(t.isDone);
 
+        convertView.setPadding(5, 5, 5, 5);
+
         return convertView;
     }
 }
