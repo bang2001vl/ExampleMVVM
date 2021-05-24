@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoViewModel extends BaseObservable {
-
     private List<TodoModel> todoList;
     private int selectedTodo_Index;
 
