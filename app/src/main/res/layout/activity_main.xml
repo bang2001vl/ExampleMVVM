@@ -14,10 +14,11 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:layout_height="match_parent"
+            android:background="#DB3022"
             app:popupTheme="@style/Theme.ExampleMVVM.PopupOverlay"
-            />
+            app:title="Todo" />
+
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:backgroundTint="#275970"
+        android:backgroundTint="#DB3022"
         android:foreground="@drawable/ic_baseline_add_24"
 
         />

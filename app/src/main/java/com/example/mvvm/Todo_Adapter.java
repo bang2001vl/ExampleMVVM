@@ -1,6 +1,9 @@
 package com.example.mvvm;
 
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,8 +66,18 @@ public class Todo_Adapter extends BaseAdapter {
         }
 
         TodoModel t = this.Todolist.get(position);
-        view.ed_title.setText(t.name);
+
         view.cb_todo.setChecked(t.isDone);
+
+        if ( t.isDone == false)
+        {
+
+            SpannableString Name = new SpannableString(t.name);
+            Name.setSpan(new StrikethroughSpan(), 0, (t.name).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            view.ed_title.setText(Name);
+        }
+        else view.ed_title.setText(t.name);
 
         convertView.setPadding(5, 5, 5, 5);
 
