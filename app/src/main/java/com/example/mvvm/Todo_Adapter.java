@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,12 +16,12 @@ import java.util.zip.Inflater;
 
 public class Todo_Adapter extends BaseAdapter {
     List<TodoModel> Todolist;
+
     Context context;
 
     static  class  ViewHoder
     {
-        EditText ed_title;
-        EditText ed_content;
+        TextView ed_title;
         CheckBox cb_todo;
     }
 
@@ -51,8 +52,7 @@ public class Todo_Adapter extends BaseAdapter {
         {
             view = new ViewHoder();
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_todo, parent, false);
-            view.ed_content =(EditText) convertView.findViewById(R.id.Content);
-            view.ed_title = (EditText) convertView.findViewById(R.id.Title);
+            view.ed_title = (TextView) convertView.findViewById(R.id.Title);
             view.cb_todo = (CheckBox) convertView.findViewById(R.id.checkbox);
             convertView.setTag(view);
         }
@@ -63,7 +63,6 @@ public class Todo_Adapter extends BaseAdapter {
 
         TodoModel t = this.Todolist.get(position);
         view.ed_title.setText(t.name);
-        view.ed_content.setText(t.content);
         view.cb_todo.setChecked(t.isDone);
 
         return convertView;
