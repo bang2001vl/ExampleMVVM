@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EBEBEB"
+    android:background="@drawable/bg"
     tools:context=".SecondFragment">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -27,6 +27,7 @@
             android:paddingEnd="100dp"
             android:paddingStart="20dp"
             android:textSize="25sp"
+            android:background="@drawable/hover_item"
             android:layout_gravity="center"
             android:hint="Tên "
             />
@@ -59,17 +60,22 @@
             android:layout_height="match_parent"
             android:textSize="25sp"
             android:minLines="5"
+            android:background="@drawable/hover_item"
             android:hint="Nội dung"
             android:gravity="top"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/button_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Thêm"
+        android:textColor="@color/white"
+        android:background="@drawable/hover_item"
+        android:backgroundTint="#275970"
         android:textSize="20sp"
+
         android:layout_marginBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

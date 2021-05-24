@@ -43,13 +43,15 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        TodoModel t1 = new TodoModel("1", "Androi", false);
+       /* TodoModel t1 = new TodoModel("1", "Androi", false);
         List<TodoModel> todoList = new ArrayList<>( );
         todoList.add(t1);
         todoList.add(t1);
         todoList.add(t1);
 
-        Fragment f = FirstFragment.New_FirstFragment(todoList);
+        Fragment f = FirstFragment.New_FirstFragment(todoList);*/
+
+        Fragment f = new FirstFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_content_main, f).commit();
 
