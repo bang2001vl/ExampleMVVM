@@ -60,20 +60,4 @@ public class Todo_Viewmodel  extends ViewModel {
             current_todo.name = spanBuilder.toString();
         }
     }
-
-
-    public void onClick_Checked()
-    {
-        current_todo.isDone = !current_todo.isDone;
-        if ( current_todo.isDone == false)
-        {
-            SpannableStringBuilder spanBuilder = new SpannableStringBuilder(current_todo.name);
-            StrikethroughSpan strikethroughSpan = new StrikethroughSpan();
-            spanBuilder.setSpan( strikethroughSpan, 0, current_todo.name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-            );
-            current_todo.name = spanBuilder.toString();
-        }
-    }
-
-
 }

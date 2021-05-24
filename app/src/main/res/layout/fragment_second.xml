@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<layout>
+    <data>
+        <variable
+            name="binding"
+            type="com.example.mvvm.ToDoViewModel" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="300dp"
+    android:minHeight="400dp"
     android:background="@drawable/bg"
     tools:context=".SecondFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/layout_title"
         app:boxBackgroundColor="@android:color/transparent"
@@ -30,6 +37,7 @@
             android:background="@drawable/hover_item"
             android:layout_gravity="center"
             android:hint="Tên "
+            android:text="@={binding.selectedTodoModel.name}"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <CheckBox
@@ -42,9 +50,10 @@
         android:layout_marginEnd="5dp"
         android:text="Xong"
         android:textSize="20sp"
+        android:checked="@={binding.selectedTodoModel.isDone}"
         />
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/layout_content"
         app:boxBackgroundColor="@android:color/transparent"
@@ -62,13 +71,15 @@
             android:minLines="5"
             android:background="@drawable/hover_item"
             android:hint="Nội dung"
-            android:gravity="top"/>
+            android:gravity="top"
+            android:text="@={binding.selectedTodoModel.content}"
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <android.widget.Button
         android:id="@+id/button_second"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Thêm"
         android:textColor="@color/white"
@@ -77,7 +88,10 @@
         android:textSize="20sp"
 
         android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

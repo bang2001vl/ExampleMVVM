@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment f = FirstFragment.New_FirstFragment(todoList);*/
 
-        Fragment f = new FirstFragment();
+        FirstFragment f = new FirstFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_content_main, f).commit();
 
@@ -61,8 +61,16 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(findViewById(R.id.nav_host_fragment_content_main))
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                ToDoViewModel viewModel = f.getViewModel();
+                viewModel.addTodo(new TodoModel("","", false));
+                viewModel.setSelectedTodo_Index(viewModel.getTodoList().size() - 1);
+
+                SecondFragment secondFragment = new SecondFragment();
+                secondFragment.viewModel = viewModel;
+
+                secondFragment.showNow(getSupportFragmentManager(), "createTodo");
+                /*getSupportFragmentManager().beginTransaction().addToBackStack("createFragment")
+                        .add(R.id.nav_host_fragment_content_main, secondFragment, "MY_TAG").commit();*/
             }
         });
     }

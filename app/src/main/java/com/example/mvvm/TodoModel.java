@@ -38,6 +38,13 @@ public class TodoModel {
                 '}';
     }
 
+    public void copyTo(TodoModel other)
+    {
+        other.name = this.name;
+        other.content = this.content;
+        other.isDone = this.isDone;
+    }
+
     public static TodoModel fromString(String str){
         int start = str.indexOf("Name='")+6;
         int end = str.indexOf('\'', start);

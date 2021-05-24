@@ -16,6 +16,7 @@ import java.util.zip.Inflater;
 
 public class Todo_Adapter extends BaseAdapter {
     List<TodoModel> Todolist;
+    public void setTodolist(List<TodoModel> list){this.Todolist = list;}
 
     Context context;
 
