@@ -1,6 +1,7 @@
 package com.example.mvvm;
 
 import android.content.Context;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
@@ -50,14 +51,14 @@ public class Todo_Viewmodel  extends ViewModel {
     }
     public void onClick_Checked()
     {
-        current_todo.isDone = !current_todo.isDone;
+        /*current_todo.isDone = !current_todo.isDone;
         if ( current_todo.isDone == false)
         {
-            SpannableStringBuilder spanBuilder = new SpannableStringBuilder(current_todo.name);
-            StrikethroughSpan strikethroughSpan = new StrikethroughSpan();
-            spanBuilder.setSpan( strikethroughSpan, 0, current_todo.name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-            );
-            current_todo.name = spanBuilder.toString();
-        }
+
+            SpannableString Name = new SpannableString(current_todo.name);
+            Name.setSpan(new StrikethroughSpan(), 0, (current_todo.name).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            current_todo.name = Name.toString();
+        }*/
     }
 }

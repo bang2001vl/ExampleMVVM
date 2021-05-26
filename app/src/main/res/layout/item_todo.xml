@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="Todo_viewmodel"
@@ -9,32 +11,27 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:orientation="vertical"
     android:layout_margin="10dp"
-    android:background="@drawable/hover_item"
+    android:background="@drawable/focus_line"
     tools:context=".MainActivity"
     android:descendantFocusability="blocksDescendants"
     >
 
-
-    <TextView
+    <EditText
         android:id="@+id/Title"
         android:layout_width="350dp"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
         android:background="@color/white"
+        android:gravity="center|left"
+        android:paddingStart="10dp"
         android:text="@={Todo_viewmodel.current_todo.name}"
         android:textColor="@color/black"
-        android:gravity="center|left"
-        android:layout_margin="10dp"
-        android:paddingStart="10dp"
         android:textSize="@dimen/Title_text_size"
         android:textStyle="bold"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,12 +41,11 @@
         android:layout_height="match_parent"
         android:checked="@={Todo_viewmodel.current_todo.isDone}"
         android:onClick="@{() -> Todo_viewmodel.onClick_Checked()}"
-        android:layout_marginStart="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
-        />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
