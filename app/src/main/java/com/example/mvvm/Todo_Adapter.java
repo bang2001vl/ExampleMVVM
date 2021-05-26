@@ -69,15 +69,14 @@ public class Todo_Adapter extends BaseAdapter {
 
         view.cb_todo.setChecked(t.isDone);
 
-        if ( t.isDone == false)
+      /*  if ( t.isDone == false)
         {
 
             SpannableString Name = new SpannableString(t.name);
             Name.setSpan(new StrikethroughSpan(), 0, (t.name).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
             view.ed_title.setText(Name);
         }
-        else view.ed_title.setText(t.name);
+        else*/ view.ed_title.setText(t.name);
 
         convertView.setPadding(5, 5, 5, 5);
 
