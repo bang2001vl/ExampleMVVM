@@ -60,7 +60,7 @@ public class FirstFragment extends Fragment {
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         binding.setBinding(new ToDoViewModel());
 
-        Todo_Adapter adapter = new Todo_Adapter(binding.getBinding().getTodoList(), getContext());
+        Todo_Adapter adapter = new Todo_Adapter(binding.getBinding(), getContext());
         binding.ListviewItem.setAdapter(adapter);
 
         binding.ListviewItem.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -72,7 +72,6 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        binding.getBinding().addOnPropertyChangedCallback(observer);
         reloadData();
         return binding.getRoot();
     }
@@ -107,17 +106,6 @@ public class FirstFragment extends Fragment {
         secondFragment_editMode.showNow(getActivity().getSupportFragmentManager(), "editTodo");
     }
 
-    final private Observable.OnPropertyChangedCallback observer = new Observable.OnPropertyChangedCallback() {
-        @Override
-        public void onPropertyChanged(Observable sender, int propertyId) {
-            if (propertyId == BR.todoList) {
-                Todo_Adapter adapter = ((Todo_Adapter) binding.ListviewItem.getAdapter());
-                adapter.setTodolist(binding.getBinding().getTodoList());
-                adapter.notifyDataSetChanged();
-            }
-        }
-    };
-
     public void reloadData() {
         getTodoAll();
     }
@@ -151,7 +139,7 @@ public class FirstFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding.getBinding().removeOnPropertyChangedCallback(observer);
+        ((Todo_Adapter)binding.ListviewItem.getAdapter()).recycle();
         binding = null;
     }
 

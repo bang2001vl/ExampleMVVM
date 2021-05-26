@@ -13,14 +13,14 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.databinding.Observable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 import java.util.zip.Inflater;
 
 public class Todo_Adapter extends BaseAdapter {
-    List<TodoModel> Todolist;
-    public void setTodolist(List<TodoModel> list){this.Todolist = list;}
+    ToDoViewModel viewModel;
 
     Context context;
 
@@ -30,19 +30,21 @@ public class Todo_Adapter extends BaseAdapter {
         CheckBox cb_todo;
     }
 
-    Todo_Adapter(List<TodoModel> list, Context context)
+    Todo_Adapter(ToDoViewModel viewModel, Context context)
     {
-        Todolist = list;
+        this.viewModel = viewModel;
         this.context = context;
+
+        viewModel.addOnPropertyChangedCallback(propertyChangedCallback);
 
     }
     public int getCount() {
-        return Todolist.size();
+        return viewModel.getTodoList().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return Todolist.get(position);
+        return viewModel.getTodoList().get(position);
     }
 
     @Override
@@ -66,28 +68,43 @@ public class Todo_Adapter extends BaseAdapter {
             view = (ViewHoder) convertView.getTag();
         }
 
-        TodoModel t = this.Todolist.get(position);
-
-        view.cb_todo.setChecked(t.isDone);
-
-        if (t.isDone)
-        {
-            SpannableString Name = new SpannableString(t.name);
-            Name.setSpan(new StrikethroughSpan(), 0, (t.name).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-            view.ed_title.setText(Name);
-        }
-        else view.ed_title.setText(t.name);
+        TodoModel model = this.viewModel.getTodoList().get(position);
 
         convertView.setPadding(5, 5, 5, 5);
+
+        view.cb_todo.setChecked(model.isDone);
 
         view.cb_todo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
+                StorageManager.createTodo(parent.getContext(), model);
+                viewModel.setSelectedTodoModel_IsDone(isChecked);
             }
         });
 
+
+        if (model.isDone)
+        {
+            SpannableString Name = new SpannableString(model.name);
+            Name.setSpan(new StrikethroughSpan(), 0, (model.name).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            view.ed_title.setText(Name);
+        }
+        else view.ed_title.setText(model.name);
+
         return convertView;
+    }
+
+    Observable.OnPropertyChangedCallback propertyChangedCallback = new Observable.OnPropertyChangedCallback() {
+        @Override
+        public void onPropertyChanged(Observable sender, int propertyId) {
+            if(propertyId == BR.todoList){notifyDataSetChanged();}
+        }
+    };
+
+    public void recycle()
+    {
+        viewModel.removeOnPropertyChangedCallback(propertyChangedCallback);
+        viewModel = null;
     }
 }
