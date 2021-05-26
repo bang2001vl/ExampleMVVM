@@ -73,7 +73,7 @@ public class FirstFragment extends Fragment {
         });
 
         binding.getBinding().addOnPropertyChangedCallback(observer);
-
+        reloadData();
         return binding.getRoot();
     }
 
@@ -118,9 +118,7 @@ public class FirstFragment extends Fragment {
         }
     };
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    public void reloadData() {
         getTodoAll();
     }
 

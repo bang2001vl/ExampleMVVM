@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_refresh) {
-            f.onResume();
+            f.reloadData();
             return true;
         }
 
