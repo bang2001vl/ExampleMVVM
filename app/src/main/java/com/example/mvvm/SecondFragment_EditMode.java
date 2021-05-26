@@ -1,10 +1,12 @@
 package com.example.mvvm;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,11 +17,26 @@ public class SecondFragment_EditMode extends SecondFragment{
         super.onViewCreated(view, savedInstanceState);
         binding.buttonSecond.setText("Sửa");
         binding.edtTitle.setEnabled(false);
+    }
+
+    @NonNull
+    @Override
+    public @NotNull Dialog onCreateDialog(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        isOK = false;
+
         temp = new TodoModel(
-                binding.getBinding().getSelectedTodoModel().name,
-                binding.getBinding().getSelectedTodoModel().content,
-                binding.getBinding().getSelectedTodoModel().isDone
-                );
+                viewModel.getSelectedTodoModel().name,
+                viewModel.getSelectedTodoModel().content,
+                viewModel.getSelectedTodoModel().isDone
+        );
+
+        return new Dialog(getActivity(), getTheme())
+        {
+            @Override
+            public void onBackPressed() {
+                SecondFragment_EditMode.this.dismiss();
+            }
+        };
     }
 
     @Override

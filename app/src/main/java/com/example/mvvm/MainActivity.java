@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ToDoViewModel viewModel = f.getViewModel();
-                viewModel.addTodo(new TodoModel("","", false));
-                viewModel.setSelectedTodo_Index(viewModel.getTodoList().size() - 1);
 
                 SecondFragment secondFragment = new SecondFragment();
                 secondFragment.viewModel = viewModel;

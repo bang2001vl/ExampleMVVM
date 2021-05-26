@@ -86,6 +86,10 @@ public class SecondFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         isOK = false;
+
+        viewModel.addTodo(new TodoModel("","", false));
+        viewModel.setSelectedTodo_Index(viewModel.getTodoList().size() - 1);
+
         return new Dialog(getActivity(), getTheme())
         {
             @Override

@@ -27,6 +27,24 @@ public class ToDoViewModel extends BaseObservable {
         return getTodoList().get(getSelectedTodo_Index());
     }
 
+    @Bindable({"todoList", "selectedTodo_Index"})
+    public String getSelectedTodoModel_Name()
+    {
+        return getTodoList().get(getSelectedTodo_Index()).name;
+    }
+
+    @Bindable({"todoList", "selectedTodo_Index"})
+    public String getSelectedTodoModel_Content()
+    {
+        return getTodoList().get(getSelectedTodo_Index()).content;
+    }
+
+    @Bindable({"todoList", "selectedTodo_Index"})
+    public boolean getSelectedTodoModel_IsDone()
+    {
+        return getTodoList().get(getSelectedTodo_Index()).isDone;
+    }
+
     public void setTodoList(List<TodoModel> list)
     {
         if(todoList != list)
@@ -70,6 +88,38 @@ public class ToDoViewModel extends BaseObservable {
             todoModel.copyTo(todoList.get(index));
             notifyPropertyChanged(BR.todoList);
         }
+    }
+
+    public void setSelectedTodoModel_Name(String name)
+    {
+        if(!this.getSelectedTodoModel().name.equals(name))
+        {
+            this.getSelectedTodoModel().name = name;
+            notifyPropertyChanged(BR.todoList);
+        }
+    }
+
+    public void setSelectedTodoModel_Content(String content)
+    {
+        if(!this.getSelectedTodoModel().content.equals(content))
+        {
+            this.getSelectedTodoModel().content = content;
+            notifyPropertyChanged(BR.todoList);
+        }
+    }
+
+    public void setSelectedTodoModel_IsDone(boolean isDone)
+    {
+        if(this.getSelectedTodoModel().isDone != isDone)
+        {
+            this.getSelectedTodoModel().isDone = isDone;
+            notifyPropertyChanged(BR.todoList);
+        }
+    }
+
+    public void notifyTodoListChanged()
+    {
+        notifyPropertyChanged(BR.todoList);
     }
 
 

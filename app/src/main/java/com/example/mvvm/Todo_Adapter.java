@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -69,9 +70,8 @@ public class Todo_Adapter extends BaseAdapter {
 
         view.cb_todo.setChecked(t.isDone);
 
-        if ( t.isDone == false)
+        if (t.isDone)
         {
-
             SpannableString Name = new SpannableString(t.name);
             Name.setSpan(new StrikethroughSpan(), 0, (t.name).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
@@ -80,6 +80,13 @@ public class Todo_Adapter extends BaseAdapter {
         else view.ed_title.setText(t.name);
 
         convertView.setPadding(5, 5, 5, 5);
+
+        view.cb_todo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
 
         return convertView;
     }

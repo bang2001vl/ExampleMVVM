@@ -37,7 +37,7 @@
             android:layout_gravity="center"
             android:hint="Tiêu đề "
             android:outlineSpotShadowColor="#DB3022"
-            android:text="@={binding.selectedTodoModel.name}"
+            android:text="@={binding.selectedTodoModel_Name}"
             />
     </com.google.android.material.textfield.TextInputLayout>
     <CheckBox
@@ -49,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="@id/layout_title"
         android:layout_marginEnd="5dp"
         android:textSize="20sp"
-        android:checked="@={binding.selectedTodoModel.isDone}"
+        android:checked="@={binding.selectedTodoModel_IsDone}"
         />
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="0dp"
@@ -71,7 +71,7 @@
             android:background="@drawable/hover_item"
             android:hint="Nội dung"
             android:gravity="top"
-            android:text="@={binding.selectedTodoModel.content}"
+            android:text="@={binding.selectedTodoModel_Content}"
             />
 
     </com.google.android.material.textfield.TextInputLayout>
