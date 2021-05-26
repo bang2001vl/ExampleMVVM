@@ -21,23 +21,19 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class StorageManager {
-    private Context mContext;
     public AppDatabase db;
 
-    public StorageManager(Context context)
+    public StorageManager()
     {
-        mContext = context;
-        db = Room.databaseBuilder(mContext.getApplicationContext(), AppDatabase.class, "test_room_db").build();
+        db = Room.databaseBuilder(MyApplication.getAppContext(), AppDatabase.class, "test_room_db").build();
     }
 
-    public static void createTodo(Context context, TodoModel todoModel)
+    public static void createTodo(TodoModel todoModel)
     {
-        StorageManager storageManager = new StorageManager(context);
+        StorageManager storageManager = new StorageManager();
         final CompletableObserver createObserver = new CompletableObserver() {
             @Override
-            public void onSubscribe(@NotNull Disposable d) {
-
-            }
+            public void onSubscribe(@NotNull Disposable d) {}
 
             @Override
             public void onComplete() {
@@ -52,13 +48,12 @@ public class StorageManager {
                 storageManager.recycle();
             }
         };
-        storageManager.db.todoDao().insert(todoModel)
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(createObserver);
+        storageManager.db.todoDao().insert(todoModel).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(createObserver);
     }
 
-    public static void deleteTodo(Context context, TodoModel todoModel)
+    public static void deleteTodo(TodoModel todoModel)
     {
-        StorageManager storageManager = new StorageManager(context);
+        StorageManager storageManager = new StorageManager();
         final CompletableObserver createObserver = new CompletableObserver() {
             @Override
             public void onSubscribe(@NotNull Disposable d) {
@@ -86,6 +81,5 @@ public class StorageManager {
     {
         db.close();
         db = null;
-        mContext = null;
     }
 }

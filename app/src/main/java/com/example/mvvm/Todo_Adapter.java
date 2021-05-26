@@ -4,27 +4,29 @@ import android.content.Context;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.databinding.Observable;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.databinding.ObservableList;
+
+import com.example.mvvm.databinding.ItemTodoBinding;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class Todo_Adapter extends BaseAdapter {
     ToDoViewModel viewModel;
 
     Context context;
 
-    static  class  ViewHoder
+    static  class ViewHolder
     {
         TextView ed_title;
         CheckBox cb_todo;
@@ -36,7 +38,6 @@ public class Todo_Adapter extends BaseAdapter {
         this.context = context;
 
         viewModel.addOnPropertyChangedCallback(propertyChangedCallback);
-
     }
     public int getCount() {
         return viewModel.getTodoList().size();
@@ -54,10 +55,10 @@ public class Todo_Adapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHoder view;
+        ViewHolder view;
         if (convertView == null)
         {
-            view = new ViewHoder();
+            view = new ViewHolder();
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_todo, parent, false);
             view.ed_title = (TextView) convertView.findViewById(R.id.Title);
             view.cb_todo = (CheckBox) convertView.findViewById(R.id.checkbox);
@@ -65,7 +66,7 @@ public class Todo_Adapter extends BaseAdapter {
         }
         else
         {
-            view = (ViewHoder) convertView.getTag();
+            view = (ViewHolder) convertView.getTag();
         }
 
         TodoModel model = this.viewModel.getTodoList().get(position);
@@ -77,7 +78,7 @@ public class Todo_Adapter extends BaseAdapter {
         view.cb_todo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                StorageManager.createTodo(parent.getContext(), model);
+                viewModel.setSelectedTodo_Index(position);
                 viewModel.setSelectedTodoModel_IsDone(isChecked);
             }
         });
@@ -98,7 +99,9 @@ public class Todo_Adapter extends BaseAdapter {
     Observable.OnPropertyChangedCallback propertyChangedCallback = new Observable.OnPropertyChangedCallback() {
         @Override
         public void onPropertyChanged(Observable sender, int propertyId) {
-            if(propertyId == BR.todoList){notifyDataSetChanged();}
+            if(propertyId == BR.todoList){
+                notifyDataSetChanged();
+            }
         }
     };
 
