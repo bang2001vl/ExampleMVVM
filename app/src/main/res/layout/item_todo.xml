@@ -6,7 +6,7 @@
     <data>
         <variable
             name="Todo_viewmodel"
-            type="com.example.mvvm.Todo_Viewmodel" />
+            type="com.example.mvvm.TodoModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,31 +22,33 @@
 
     <TextView
         android:id="@+id/Title"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:background="@color/white"
         android:gravity="center|left"
         android:paddingStart="10dp"
-        android:text="@={Todo_viewmodel.current_todo.name}"
+
+        android:text="@={Todo_viewmodel.name}"
         android:textColor="@color/black"
         android:textSize="@dimen/Title_text_size"
         android:textStyle="bold"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/checkbox"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <CheckBox
         android:id="@+id/checkbox"
-        android:layout_width="40dp"
+        android:layout_width="0dp"
+        android:minWidth="0dp"
         android:layout_height="match_parent"
-        android:checked="@={Todo_viewmodel.current_todo.isDone}"
-        android:onClick="@{() -> Todo_viewmodel.onClick_Checked()}"
+        android:checked="@={Todo_viewmodel.isDone}"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

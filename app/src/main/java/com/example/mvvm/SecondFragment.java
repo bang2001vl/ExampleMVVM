@@ -49,16 +49,9 @@ public class SecondFragment extends DialogFragment {
         binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("MY_TAG", binding.getBinding().getSelectedTodoModel().toString());
 
-                TodoModel model = new TodoModel(
-                        binding.getBinding().getSelectedTodoModel().name,
-                        binding.getBinding().getSelectedTodoModel().content,
-                        binding.getBinding().getSelectedTodoModel().isDone
-                );
-
-                Log.d("MY_TAG", model.toString());
-
-                StorageManager.createTodo(getContext(), model);
+                StorageManager.createTodo(binding.getBinding().getSelectedTodoModel());
 
                 isOK = true;
                 SecondFragment.this.dismiss();

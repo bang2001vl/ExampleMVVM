@@ -47,22 +47,12 @@ public class FirstFragment extends Fragment {
         return binding.getBinding();
     }
 
-    public void setListData(List<TodoModel> list) {
-        if (binding != null) {
-            binding.getBinding().setTodoList(list);
-        }
-    }
-
     @Override
-    public View onCreateView(
-            @NotNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+    public View onCreateView( @NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         binding.setBinding(new ToDoViewModel());
-
         Todo_Adapter adapter = new Todo_Adapter(binding.getBinding(), getContext());
         binding.ListviewItem.setAdapter(adapter);
-
         binding.ListviewItem.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -95,7 +85,6 @@ public class FirstFragment extends Fragment {
 
     public void deleteSelectedTodo()
     {
-        StorageManager.deleteTodo(getContext(), binding.getBinding().getSelectedTodoModel());
         binding.getBinding().removeTodo(binding.getBinding().getSelectedTodoModel());
     }
 
@@ -107,34 +96,10 @@ public class FirstFragment extends Fragment {
     }
 
     public void reloadData() {
-        getTodoAll();
+        binding.getBinding().getTodoAll();
     }
 
-    private void getTodoAll()
-    {
-        StorageManager storageManager = new StorageManager(getContext());
-        SingleObserver<List<TodoModel>> selectAllObserver = new SingleObserver<List<TodoModel>>() {
-            @Override
-            public void onSubscribe(@NotNull Disposable d) {/*Empty*/}
 
-            @Override
-            public void onSuccess(@NotNull List<TodoModel> todoModels) {
-                Log.d("MY_TAG", "SUCCESS: Read from database");
-                setListData(todoModels);
-                storageManager.recycle();
-            }
-
-            @Override
-            public void onError(@NotNull Throwable e) {
-                Log.e("MY_TAG", "ERROR: Cannot read from database");
-                e.printStackTrace();
-                storageManager.recycle();
-            }
-        };
-        storageManager.db.todoDao().getAll().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(selectAllObserver);
-
-    }
 
     @Override
     public void onDestroyView() {
